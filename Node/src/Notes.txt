@@ -1,1 +1,5 @@
-docker run --name    
+#build image
+docker build -t kubia .
+
+#run container
+docker run -d --name kubia-container -p 8080:8080 kubia
