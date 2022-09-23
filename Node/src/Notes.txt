@@ -3,3 +3,16 @@ docker build -t kubia .
 
 #run container
 docker run -d --name kubia-container -p 8080:8080 kubia
+
+#create pod
+kubectl run kubia --image=ksaleh/kubia --port=8080 --generator=run/v1
+
+#expose the pod as a service
+kubectl expose kubia --type=LoadBalancer --name kubia-http
+
+#to get the external ip of the service
+minikube service [service-name]
+
+#get the replication controllers inside the node, this will make a tunnel to access the service through it
+#it is interactive and the command will not return to the command shell until it is ended by the user by pressing CTRL+C
+kubectl get replicationcontrollers
