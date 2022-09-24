@@ -1,5 +1,16 @@
 #build image
 docker build -t kubia .
 
+#tag the kubia image to ksaleh/kubia
+docker image tag kubia ksaleh/kubia
+
 #run container
 docker run -d --name kubia-container -p 8080:8080 kubia
+
+#start minikube 
+minikube start --driver=docker
+
+#create replicator cluster from command line using kubectl
+kubectl run kubia --image=ksaleh/kubia --port=8080 
+
+#expose the pod 
