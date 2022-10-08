@@ -1,11 +1,17 @@
-#build image
-docker build -t kubia .
+#shutdown vmmem
+wsl --shutdown
 
+#build image
+docker build -t kubia . 
 #tag the kubia image to ksaleh/kubia
 docker image tag kubia ksaleh/kubia
+#delete image
+docker rmi kubia
 
 #run container
-docker run -d --name kubia-container -p 8080:8080 kubia
+docker run -d --name kubia-container -p 8080:8080 ksaleh/kubia
+#stop container 
+docker stop kubia-container
 
 #start minikube 
 minikube start --driver=docker
@@ -22,3 +28,4 @@ minikube service [service-name]
 #get the replication controllers inside the node, this will make a tunnel to access the service through it
 #it is interactive and the command will not return to the command shell until it is ended by the user by pressing CTRL+C
 kubectl get replicationcontrollers
+cls
